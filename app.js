@@ -9,7 +9,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 // var bootstrap = require('express-bootstrap-service');
-
+var options = {
+  key: fs.readFileSync('./keys/server.key'),
+  cert: fs.readFileSync('./keys/server.crt')
+}
 var app = express();
 
 // http.createServer(app).listen(80);
@@ -82,6 +85,6 @@ app.use(function(err, req, res, next) {
 });
 
 http.createServer(app).listen(8000);
-// https.createServer(app).listen(8001);
+https.createServer(options,app).listen(8001);
 
 module.exports = app;
