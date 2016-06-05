@@ -40,7 +40,10 @@ module.exports = {
             console.log('session_selectSite' + req.session.email);
             var query = connection.query($sql.selectSite,req.session.email,
                 function (err, result) {
-                    
+                    console.log(result);
+                    connection.release();
+                    // return res.render('sites');
+                    // return res.render('content/sites');
                 })
         })
     }

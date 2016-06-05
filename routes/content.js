@@ -9,7 +9,7 @@ router.get('/dashboard', function (req, res) {
   }
   if (req.session.email) {
     console.log('session:' + req.session.email);
-     res.locals.email = req.session.email;
+    res.locals.email = req.session.email;
   } else {
     res.redirect('/signin');
     return;
@@ -17,7 +17,7 @@ router.get('/dashboard', function (req, res) {
   res.render('content/dashboard');
 });
 
-router.get('/sites',function (req, res) {
+router.get('/sites',function (req, res, next) {
   if(req.cookies.islogin) {
     console.log('cookies:' + req.cookies.islogin);
     req.session.email = req.cookies.islogin;
@@ -29,7 +29,8 @@ router.get('/sites',function (req, res) {
     res.redirect('/signin');
     return;
   }
-  res.render('content/sites');
+  sitesDao.selectSite(req, res, next);
+  res.render('content/sites');  
 });
 
 router.post('/insertSite', function (req, res, next) {
