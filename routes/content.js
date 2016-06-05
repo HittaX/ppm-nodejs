@@ -30,12 +30,77 @@ router.get('/sites',function (req, res, next) {
     return;
   }
   sitesDao.selectSite(req, res, next);
-  res.render('content/sites');  
+  // res.render('content/sites');
 });
 
 router.post('/insertSite', function (req, res, next) {
     console.log('sessionPOST:' + req.session.email);
     sitesDao.insertSite(req, res, next);
+});
+
+router.get('/bankcards',function (req, res, next) {
+  if(req.cookies.islogin) {
+    console.log('cookies:' + req.cookies.islogin);
+    req.session.email = req.cookies.islogin;
+  }
+  if (req.session.email) {
+    console.log('sessionSITES:' + req.session.email);
+    res.locals.email = req.session.email;
+  } else {
+    res.redirect('/signin');
+    return;
+  }
+  sitesDao.selectSite(req, res, next);
+  // res.render('content/sites');
+});
+
+router.get('/identities',function (req, res, next) {
+  if(req.cookies.islogin) {
+    console.log('cookies:' + req.cookies.islogin);
+    req.session.email = req.cookies.islogin;
+  }
+  if (req.session.email) {
+    console.log('sessionSITES:' + req.session.email);
+    res.locals.email = req.session.email;
+  } else {
+    res.redirect('/signin');
+    return;
+  }
+  sitesDao.selectSite(req, res, next);
+  // res.render('content/sites');
+});
+
+router.get('/servers',function (req, res, next) {
+  if(req.cookies.islogin) {
+    console.log('cookies:' + req.cookies.islogin);
+    req.session.email = req.cookies.islogin;
+  }
+  if (req.session.email) {
+    console.log('sessionSITES:' + req.session.email);
+    res.locals.email = req.session.email;
+  } else {
+    res.redirect('/signin');
+    return;
+  }
+  sitesDao.selectSite(req, res, next);
+  // res.render('content/sites');
+});
+
+
+router.get('/databases',function (req, res, next) {
+  if(req.cookies.islogin) {
+    console.log('cookies:' + req.cookies.islogin);
+    req.session.email = req.cookies.islogin;
+  }
+  if (req.session.email) {
+    console.log('sessionSITES:' + req.session.email);
+    res.locals.email = req.session.email;
+  } else {
+    res.redirect('/signin');
+    return;
+  }
+  // sitesDao.selectSite(req, res, next);
+  res.render('content/databases');
 });
 
 module.exports = router;

@@ -37,13 +37,22 @@ module.exports = {
     selectSite : function (req, res, next) {
         var param = req.body || req.params;
         pool.getConnection(function (err, connection) {
-            console.log('session_selectSite' + req.session.email);
+            console.log('session_selectSite:' + req.session.email);
             var query = connection.query($sql.selectSite,req.session.email,
                 function (err, result) {
                     console.log(result);
                     connection.release();
                     // return res.render('sites');
-                    // return res.render('content/sites');
+                    // console.log(result.length);
+                    for ( var i = 0; i < result.length; i++)
+                    {
+                        var decipher = crypto.createDecipher('aes-256-cbc','ppmkey');
+                        var decrypted = decipher.update(result[i].password_aes,'hex', 'utf8');
+                        // console.log(result[i].password_aes);
+                        decrypted += decipher.final('utf8');
+                        result[i].password_aes = decrypted;
+                    }
+                    return res.render('content/sites',{result: result});
                 })
         })
     }
