@@ -46,6 +46,8 @@ module.exports = {
                     crypto.pbkdf2(param.password, salt, config.iterations, config.hashBytes,config.algorithm, 
                         function (err, hash) {
                             if (err) { throw err; }
+                            console.log('Hash:' + hash);
+                            console.log('Salt:' + salt);
                             query = connection.query($sql.insert,[param.email, hash.toString('hex'), salt.toString('hex')],function (err, result) {
                                 if(result) {
                                     result = {

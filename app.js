@@ -1,6 +1,7 @@
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
+var xss = require('xss');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -86,5 +87,7 @@ app.use(function(err, req, res, next) {
 
 http.createServer(app).listen(8000);
 https.createServer(options,app).listen(8001);
+
+console.log(xss('<script> alert("xss"); </script>'));
 
 module.exports = app;
