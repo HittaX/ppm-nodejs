@@ -41,7 +41,7 @@ html(lang='en')
             li
                 a(href='bankcards') Bank Cards
             li
-                a(href='identifies') Identifies
+                a(href='#') Identifies
             li
                 a(href='servers') Servers
             li.active
@@ -60,11 +60,11 @@ html(lang='en')
                 .modal-body
                   form.form(action='/content/insertDatabase', method='POST')
                     .form-group
-                      label.col-lg-2(for='exampleURL')  URL 
-                      input#exampleURL.form-control(type='text', name='url', placeholder='URL')
-                    .form-group
-                      label.col-lg-2(for='exampleSiteName')  Sitename 
-                      input#exampleSiteName.form-control(type='text', name='sitename', placeholder='Site Name')
+                      label.col-lg-2(for='exampleURL')  Address
+                      input#exampleURL.form-control(type='text', name='address', placeholder='Server Address')
+                    //- .form-group
+                    //-   label.col-lg-2(for='exampleSiteName')  Sitename 
+                    //-   input#exampleSiteName.form-control(type='text', name='sitename', placeholder='Site Name')
                     .form-group
                       label.col-lg-2(for='exampleUsername')  Username 
                       input#exampleUsername.form-control(type='text', name='username', placeholder='Username')
@@ -76,6 +76,9 @@ html(lang='en')
                     .form-group
                       label.col-lg-2(for='examplePasswd')  Password 
                       input#examplePasswd.form-control(type='password', name='password', placeholder='Password')
+                    .form-group
+                      label.col-lg-5(for='exampleCO')  Connect Options 
+                      input#exampleCO.form-control(type='text', name='co', placeholder='Connect Options')
                     .form-group
                       label.col-lg-2(for='exampleLabel')  Label 
                       select.form-control(name='label')
@@ -95,19 +98,19 @@ html(lang='en')
             table.table.table-striped
               thead
                 tr
-                  th URL
-                  th Sitename
+                  th Address
                   th Username
                   th Password
+                  th Connect Options
                   th Label
                   th Comments
                 tbody
                   each item in result
                     tr
-                      td= item.website
-                      td= item.sitename
+                      td= item.address
                       td= item.username
                       td= item.password_aes
+                      td= item.connection_option
                       td= item.labels
                       td= item.notes
                       

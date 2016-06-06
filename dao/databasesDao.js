@@ -23,7 +23,7 @@ module.exports = {
             var encrypted = cipher.update(param.password, 'utf8', 'hex');
             encrypted += cipher.final('hex');
             console.log(encrypted);
-            var query = connection.query($sql.insertDatabase,[req.session.email,param.address,param.username,encrypted,param.port,param.label,param.comments],
+            var query = connection.query($sql.insertDatabase,[req.session.email,param.username,encrypted,param.co,param.label,param.comments,param.address],
                 function (err, result) {
                     console.log(query.sql);
                     connection.release();
@@ -43,7 +43,7 @@ module.exports = {
                     console.log(result);
                     connection.release();
                     // return res.render('sites');
-                    // console.log(result.length);
+                    console.log(result.length);
                     for ( var i = 0; i < result.length; i++)
                     {
                         var decipher = crypto.createDecipher('aes-256-cbc','ppmkey');
