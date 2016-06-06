@@ -58,13 +58,13 @@ html(lang='en')
                     span(aria-hidden='true') ×
                   h4#myModalLabel.modal-title Add 
                 .modal-body
-                  form.form(action='/content/insertSite', method='POST')
+                  form.form(action='/content/insertServer', method='POST')
                     .form-group
-                      label.col-lg-2(for='exampleURL')  URL 
-                      input#exampleURL.form-control(type='text', name='url', placeholder='URL')
+                      label.col-lg-5(for='exampleURL')  Server Address 
+                      input#exampleURL.form-control(type='text', name='address', placeholder='Server Address')
                     .form-group
-                      label.col-lg-2(for='exampleSiteName')  Sitename 
-                      input#exampleSiteName.form-control(type='text', name='sitename', placeholder='Site Name')
+                      label.col-lg-2(for='exampleSiteName')  Port
+                      input#exampleSiteName.form-control(type='text', name='port', placeholder='Port')
                     .form-group
                       label.col-lg-2(for='exampleUsername')  Username 
                       input#exampleUsername.form-control(type='text', name='username', placeholder='Username')
@@ -95,8 +95,8 @@ html(lang='en')
             table.table.table-striped
               thead
                 tr
-                  th URL
-                  th Sitename
+                  th Server Address
+                  th Port
                   th Username
                   th Password
                   th Label
@@ -104,8 +104,8 @@ html(lang='en')
                 tbody
                   each item in result
                     tr
-                      td= item.website
-                      td= item.sitename
+                      td= item.address
+                      td= item.port
                       td= item.username
                       td= item.password_aes
                       td= item.labels
@@ -113,18 +113,8 @@ html(lang='en')
                       
             .bs-example.bs-example-padded-bottom
             button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#myModal')
-              | Add Logins
+              | Add a Server
           // /Add Logins Button
     script(src='https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js')
     script(src='https://cdn.bootcss.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js')
     script(src='/assets/js/docs.min.js')
-    //
-      <script type="text/javascript">
-      $('#logout').click(function(){
-      console.log('logout button clicked');
-      $.ajax({url: '/logout', success: function(req, res, next){
-      console.log('successfully logout',res);
-      }});
-      });
-      </script>
-

@@ -58,34 +58,51 @@ html(lang='en')
                     span(aria-hidden='true') ×
                   h4#myModalLabel.modal-title Add 
                 .modal-body
-                  form.form(action='/content/insertSite', method='POST')
+                  form.form(action='/content/insertBankcard', method='POST')
                     .form-group
-                      label.col-lg-2(for='exampleURL')  URL 
-                      input#exampleURL.form-control(type='text', name='url', placeholder='URL')
+                      label.col-lg-2(for='exampleType')  Type
+                      select.form-control(name='type')
+                        option Credit Card
+                        option Debit Card
                     .form-group
-                      label.col-lg-2(for='exampleSiteName')  Sitename 
-                      input#exampleSiteName.form-control(type='text', name='sitename', placeholder='Site Name')
+                      label.col-lg-5(for='exampleSiteName')  Bankcard Number 
+                      input#exampleSiteName.form-control(type='text', name='cardnumber', placeholder='Bankcard Number')
                     .form-group
-                      label.col-lg-2(for='exampleUsername')  Username 
-                      input#exampleUsername.form-control(type='text', name='username', placeholder='Username')
+                      label.col-lg-2(for='exampleBands')  Bands
+                      
+                      label.checkbox-inline
+                        input#inlineCheckbox1(type='checkbox', name='option1', value='Visa')
+                        | Visa
+                      label.checkbox-inline
+                        input#inlineCheckbox2(type='checkbox', name='option2', value='MasterCard')
+                        | MasterCard
+                      label.checkbox-inline
+                        input#inlineCheckbox3(type='checkbox', name='option3', value='UnionPay')
+                        | UnionPay
+                      label.checkbox-inline
+                        input#inlineCheckbox4(type='checkbox', name='option4', value='JCB')
+                        | JCB
                     //
                       <div class="form-group">
                       <label for="exampleEmail" class="col-lg-2"> Email </label>
                       <input type="email" class="form-control" name="email" id="exampleEmail" placeholder="Email">
                       </div>
                     .form-group
-                      label.col-lg-2(for='examplePasswd')  Password 
-                      input#examplePasswd.form-control(type='password', name='password', placeholder='Password')
+                      label.col-lg-4(for='exampleValid')  Valid From 
+                      input#exampleValid.form-control(type='text', name='valid', placeholder='Valid From')
+                    .form-group
+                      label.col-lg-4(for='exampleExpiry')  Expiry Date
+                      input#exampleExpiry.form-control(type='text', name='expiry', placeholder='Expiry Date')
                     .form-group
                       label.col-lg-2(for='exampleLabel')  Label 
                       select.form-control(name='label')
-                        option Social
-                        option Work
-                        option Hobby
+                        option Salary
+                        option Consumption
+                        option Loan
                         option Other
                     .form-group
-                      label.col-lg-2(for='examplePasswd')  Comments 
-                      input#examplePasswd.form-control(type='text', name='comments', placeholder='Write down comments')
+                      label.col-lg-2(for='exampleComments')  Comments 
+                      input#exampleComments.form-control(type='text', name='comments', placeholder='Write down comments')
                     button.btn.btn-default.col-md-offset-7(type='button', data-dismiss='modal') Close
                     button.btn.btn-primary.col-md-offset-1(type='submit') Save
               // /.modal-content
@@ -95,25 +112,27 @@ html(lang='en')
             table.table.table-striped
               thead
                 tr
-                  th URL
-                  th Sitename
-                  th Username
-                  th Password
+                  th Type
+                  th Card Number
+                  th Bands
+                  th Valid From
+                  th Expiry Date
                   th Label
                   th Comments
                 tbody
                   each item in result
                     tr
-                      td= item.website
-                      td= item.sitename
-                      td= item.username
-                      td= item.password_aes
+                      td= item.type
+                      td= item.card_number
+                      td= item.bands
+                      td= item.valid_from
+                      td= item.expiry_date
                       td= item.labels
                       td= item.notes
                       
             .bs-example.bs-example-padded-bottom
             button.btn.btn-primary.btn-lg(type='button', data-toggle='modal', data-target='#myModal')
-              | Add Logins
+              | Add a Bankcard
           // /Add Logins Button
     script(src='https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js')
     script(src='https://cdn.bootcss.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js')
